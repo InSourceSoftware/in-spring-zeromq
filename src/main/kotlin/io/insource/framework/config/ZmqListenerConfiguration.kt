@@ -1,0 +1,8 @@
+package io.insource.framework.config
+
+import io.insource.framework.annotation.ConditionalOnEnableZmqListener
+import org.springframework.context.annotation.Configuration
+
+@Configuration
+@ConditionalOnEnableZmqListener
+internal class ZmqListenerConfiguration

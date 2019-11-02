@@ -1,0 +1,9 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.insource.framework.config.ZmqPublisherConfiguration,\
+io.insource.framework.config.ZmqPublisherProperties,\
+io.insource.framework.config.ZmqListenerConfiguration,\
+io.insource.framework.config.ZmqListenerProperties,\
+io.insource.framework.config.ZmqSubscriberConfiguration,\
+io.insource.framework.config.ZmqSubscriberProperties,\
+io.insource.framework.zeromq.SocketListener,\
+io.insource.framework.zeromq.TopicListener

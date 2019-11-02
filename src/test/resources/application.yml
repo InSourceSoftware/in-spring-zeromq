@@ -1,0 +1,11 @@
+zmq:
+  publisher:
+    topics:
+      - test
+    port: 52345
+  subscriber:
+    port: 52345
+
+logging:
+  level:
+    io.insource: trace
