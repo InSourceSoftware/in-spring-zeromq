@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   id("java")
   id("maven")
+  id("signing")
   id("maven-publish")
   id("org.jetbrains.kotlin.jvm") version "1.3.50"
   id("org.jetbrains.kotlin.plugin.spring") version "1.3.50"
@@ -21,6 +22,18 @@ tasks.register<Jar>("javadocJar") {
 }
 
 publishing {
+  repositories {
+    maven {
+      url = uri("https://maven.pkg.github.com/InSourceSoftware/in-spring-zeromq")
+      credentials {
+        val githubUsername: String by project
+        val githubPassword: String by project
+        username = githubUsername
+        password = githubPassword
+      }
+    }
+  }
+
   publications {
     create<MavenPublication>("maven") {
       groupId = Publishing.groupId
@@ -29,6 +42,7 @@ publishing {
       from(components["kotlin"])
       artifact(tasks["sourcesJar"])
       artifact(tasks["javadocJar"])
+
       pom {
         name.set(Publishing.artifactId)
         description.set(Publishing.description)
