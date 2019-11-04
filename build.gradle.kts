@@ -26,8 +26,8 @@ publishing {
     maven {
       url = uri("https://maven.pkg.github.com/InSourceSoftware/in-spring-zeromq")
       credentials {
-        username = project.findProperty("servers.github.username") ?: System.getenv("GITHUB_USERNAME")
-        password = project.findProperty("servers.github.password") ?: System.getenv("GITHUB_PASSWORD")
+        username = project.findProperty("servers.github.username")?.toString() ?: System.getenv("GITHUB_USERNAME")
+        password = project.findProperty("servers.github.password")?.toString() ?: System.getenv("GITHUB_PASSWORD")
       }
     }
   }
