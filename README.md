@@ -116,7 +116,7 @@ public class MyConfiguration {
 
     public static class MyMessageConverter implements MessageConverter {
         @Override
-        public String fromMessage(Message message) {
+        public Object fromMessage(Message message) {
             return message.popString();
         }
 
