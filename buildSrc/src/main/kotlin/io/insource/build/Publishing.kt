@@ -3,7 +3,7 @@ package io.insource.build
 object Publishing {
   val groupId = "io.insource"
   val artifactId = "in-spring-zeromq"
-  val version = "0.0.1"
+  val version = "0.0.2"
   val description = "Spring Boot enabled ZeromMQ integrations inspired by spring-rabbit and built on jzmq-api."
   val url = "https://github.com/InSourceSoftware/in-spring-zeromq"
   val license = "Mozilla Public License Version 2.0"
