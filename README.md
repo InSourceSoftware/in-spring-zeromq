@@ -18,7 +18,7 @@ Maven:
 Gradle:
 
 ```kotlin
-implementation("io.insource:in-spring-zeromq:0.0.1")
+implementation("io.insource:in-spring-zeromq:0.0.2")
 ```
 
 ### Publisher
