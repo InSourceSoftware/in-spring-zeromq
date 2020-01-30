@@ -7,12 +7,13 @@ import org.zeromq.api.SocketType
 /**
  * Factory for creating channels using socket-per-thread semantics.
  */
+@Deprecated("Use ZmqTemplate instead.")
 class ChannelFactory private constructor(
   private val context: Context,
   private val topic: String
 ) {
   /** ThreadLocal to track objects per thread. */
-  private val threadLocal = ThreadLocal.withInitial {
+  private val channels = ThreadLocal.withInitial {
     Channel(context.buildSocket(SocketType.PUSH).connect("inproc://$topic"), topic)
   }
 
@@ -22,7 +23,7 @@ class ChannelFactory private constructor(
    * @return A thread-local instance of a channel
    */
   fun channel(): Channel {
-    return threadLocal.get()
+    return channels.get()
   }
 
   companion object {

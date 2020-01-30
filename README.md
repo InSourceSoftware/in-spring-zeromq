@@ -3,7 +3,7 @@ Spring Boot enabled ZeromMQ integrations inspired by spring-rabbit and built on 
 
 ## Getting Started
 
-This project is built on Spring Boot. Add this project as dependency to your Spring Boot application to get started.
+This project is built on Spring Boot. Add this project as a dependency to your Spring Boot application to get started.
 
 Maven:
 

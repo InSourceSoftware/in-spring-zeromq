@@ -11,15 +11,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
-import org.zeromq.api.Message
 import java.util.concurrent.CountDownLatch
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(classes = [ZeromqTestConfiguration::class])
-class TopicListenerTest {
+class ZmqTemplateTest {
   @ZmqSubscriber(
-    QueueBinding(topic = "TopicListenerTest", key = "Greeting", queue = "greetings"),
-    QueueBinding(topic = "TopicListenerTest", key = "Message", queue = "messages")
+    QueueBinding(topic = "ZmqTemplateTest", key = "Greeting", queue = "greetings"),
+    QueueBinding(topic = "ZmqTemplateTest", key = "Message", queue = "messages")
   )
   class Subscriber {
     @ZmqHandler
@@ -37,10 +36,18 @@ class TopicListenerTest {
 
   @Test
   fun testHello() {
-    val channelFactory = ChannelFactory.create("TopicListenerTest")
-    val channel = channelFactory.channel()
-    channel.send("Greeting", Message("Hello, World"))
-    channel.send("Message", Message("This is a message."))
+    val zmqTemplate = ZmqTemplate().apply {
+      topic = "ZmqTemplateTest"
+      routingKey = "Message"
+      messageConverter = DefaultMessageConverter()
+    }
+
+    // Received using default routing key of Message
+    zmqTemplate.send("This is a message.")
+    // Received using explicit routing key of Greeting
+    zmqTemplate.send("Greeting", "Hello, World")
+    // Not received using bunk routing key
+    zmqTemplate.send("Nothing", "This message is not received.")
 
     countDownLatch.await()
     assertThat(messages, hasSize(2))

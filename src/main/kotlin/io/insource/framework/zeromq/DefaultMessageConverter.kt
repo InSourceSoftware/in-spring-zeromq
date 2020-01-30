@@ -11,7 +11,7 @@ import org.zeromq.api.Message
 @Component
 @ConditionalOnMissingBean(MessageConverter::class)
 class DefaultMessageConverter : MessageConverter {
-  override fun toMessage(obj: Any): Message {
+  override fun toMessage(obj: Any, headers: Map<String, String>): Message {
     return Message(obj.toString())
   }
 

@@ -1,7 +1,8 @@
 zmq:
   publisher:
     topics:
-      - test
+      - TopicListenerTest
+      - ZmqTemplateTest
     port: 52345
   subscriber:
     port: 52345

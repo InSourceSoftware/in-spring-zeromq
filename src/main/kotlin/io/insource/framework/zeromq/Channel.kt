@@ -2,6 +2,7 @@ package io.insource.framework.zeromq
 
 import org.zeromq.api.Message
 import org.zeromq.api.Socket
+import java.io.Closeable
 
 /**
  * Message channel for sending messages to a topic using a routing key.
@@ -9,7 +10,7 @@ import org.zeromq.api.Socket
 class Channel internal constructor(
   private val socket: Socket,
   private val topic: String
-) {
+) : Closeable {
   /**
    * Send a message to this channel's topic using a routing key.
    *
@@ -29,5 +30,12 @@ class Channel internal constructor(
       .addFrame(topicInfo)
       .addFrames(message)
     socket.send(frames)
+  }
+
+  /**
+   * Close the underlying socket manually. Note: This step is optional.
+   */
+  override fun close() {
+    socket.close()
   }
 }

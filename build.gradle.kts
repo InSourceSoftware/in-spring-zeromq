@@ -77,14 +77,13 @@ dependencies {
   val springBootVersion = Versions.springBoot
   val jzmqApiVersion = Versions.jzmqApi
 
-  implementation(dependencies.platform("org.springframework.boot:spring-boot-parent:$springBootVersion"))
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-  implementation("org.springframework.boot:spring-boot-autoconfigure")
-  implementation("org.springframework:spring-context")
+  implementation("org.springframework.boot:spring-boot-autoconfigure:$springBootVersion")
+  implementation("org.springframework:spring-context:$springBootVersion")
   implementation("org.zeromq:jzmq-api:$jzmqApiVersion")
-  compileOnly("org.springframework.boot:spring-boot-configuration-processor")
-  testImplementation("org.springframework.boot:spring-boot-starter-test")
+  compileOnly("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
+  testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
 }
 
 tasks.withType<KotlinCompile> {
