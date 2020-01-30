@@ -1,5 +1,6 @@
 package io.insource.framework.zeromq
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.stereotype.Component
 import org.zeromq.api.Message
 
@@ -10,6 +11,7 @@ import org.zeromq.api.Message
  * the behavior of the `fromMessage()` method.
  */
 @Component
+@ConditionalOnMissingBean(MessageConverter::class)
 class SimpleMessageConverter : MessageConverter {
   override fun toMessage(obj: Any, headers: Map<String, String>): Message {
     val contentType: String

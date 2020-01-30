@@ -44,16 +44,17 @@ class ZmqTemplate(private val context: Context) {
    * @param obj The message payload
    */
   fun send(routingKey: String, obj: Any) {
-    send(routingKey, obj, mapOf())
+    send(routingKey, mapOf(), obj)
   }
 
   /**
    * Send a message to the default topic.
    *
+   * @param routingKey The routing key
    * @param obj The message payload
    * @param headers Message headers to go with the payload
    */
-  fun send(routingKey: String, obj: Any, headers: Map<String, String>) {
+  fun send(routingKey: String, headers: Map<String, String>, obj: Any) {
     val channel = channels.get()
     val message = messageConverter.toMessage(obj, headers)
     channel.send(routingKey, message)
