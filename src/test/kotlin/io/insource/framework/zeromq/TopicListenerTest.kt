@@ -37,8 +37,8 @@ class TopicListenerTest {
 
   @Test
   fun testHello() {
-    val channelFactory = ChannelFactory.create("TopicListenerTest")
-    val channel = channelFactory.channel()
+    val channelFactory = ChannelFactory.create()
+    val channel = channelFactory.createChannel("TopicListenerTest")
     channel.send("Greeting", Message("Hello, World"))
     channel.send("Message", Message("This is a message."))
 

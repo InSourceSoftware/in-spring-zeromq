@@ -5,36 +5,27 @@ import org.zeromq.api.Context
 import org.zeromq.api.SocketType
 
 /**
- * Factory for creating channels using socket-per-thread semantics.
+ * Factory for creating channels.
  */
-@Deprecated("Use ZmqTemplate instead.")
-class ChannelFactory private constructor(
-  private val context: Context,
-  private val topic: String
-) {
-  /** ThreadLocal to track objects per thread. */
-  private val channels = ThreadLocal.withInitial {
-    Channel(context.buildSocket(SocketType.PUSH).connect("inproc://$topic"), topic)
-  }
-
+class ChannelFactory private constructor(private val context: Context) {
   /**
-   * Get or create a channel.
+   * Create a channel for the given topic.
    *
-   * @return A thread-local instance of a channel
+   * @param topic The topic name used to uniquely identify a channel
+   * @return A new Channel
    */
-  fun channel(): Channel {
-    return channels.get()
+  fun createChannel(topic: String): Channel {
+    return Channel(context.buildSocket(SocketType.PUSH).connect("inproc://$topic"), topic)
   }
 
   companion object {
     /**
      * Create a channel factory.
      *
-     * @param topic The topic name used to uniquely identify a channel
      * @param context The 0MQ context
      */
-    fun create(topic: String = "default", context: Context = ContextFactory.context()): ChannelFactory {
-      return ChannelFactory(context, topic)
+    fun create(context: Context = ContextFactory.context()): ChannelFactory {
+      return ChannelFactory(context)
     }
   }
 }

@@ -2,7 +2,6 @@ package io.insource.framework.zeromq
 
 import org.zeromq.ContextFactory
 import org.zeromq.api.Context
-import org.zeromq.api.SocketType
 
 /**
  * Helper class that simplifies synchronous ZeroMQ access (sending and receiving messages)
@@ -23,9 +22,12 @@ class ZmqTemplate(private val context: Context) {
   /** Message converter used to convert a payload to/from a 0MQ `Message`. */
   var messageConverter: MessageConverter = SimpleMessageConverter()
 
-  /** ThreadLocal for creating channels using socket-per-thread semantics. */
+  /** Channel factory to create channels for the configured topic. */
+  private val channelFactory: ChannelFactory = ChannelFactory.create(context)
+
+  /** ThreadLocal for managing channels using socket-per-thread semantics. */
   private val channels: ThreadLocal<Channel> = ThreadLocal.withInitial {
-    Channel(context.buildSocket(SocketType.PUSH).connect("inproc://$topic"), topic)
+    channelFactory.createChannel(topic)
   }
 
   /**

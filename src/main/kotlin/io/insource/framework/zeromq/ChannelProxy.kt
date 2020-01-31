@@ -9,7 +9,7 @@ import org.zeromq.api.SocketType
 /**
  * Component that will proxy streams of messages to a remote server.
  */
-internal class Channels private constructor(
+class ChannelProxy private constructor(
   private val context: Context,
   private val topics: List<String>
 ) {
@@ -20,7 +20,7 @@ internal class Channels private constructor(
    * @param host The host name to connect to
    * @param port The port to connect to
    */
-  fun connect(host: String = "localhost", port: Int = 1337): Channels {
+  fun connect(host: String = "localhost", port: Int = 1337): ChannelProxy {
     for (topic in topics) {
       LOGGER.info("Forwarding messages on topic $topic to tcp://$host:$port")
 
@@ -33,7 +33,7 @@ internal class Channels private constructor(
   }
 
   companion object {
-    private val LOGGER: Logger = LoggerFactory.getLogger(Channels::class.java)
+    private val LOGGER: Logger = LoggerFactory.getLogger(ChannelProxy::class.java)
 
     /**
      * Create a new Channels.
@@ -41,8 +41,8 @@ internal class Channels private constructor(
      * @param topics A list of topic names to bind to
      * @param context The 0MQ context
      */
-    fun create(topics: List<String>, context: Context = ContextFactory.context()): Channels {
-      return Channels(context, topics)
+    fun create(topics: List<String>, context: Context = ContextFactory.context()): ChannelProxy {
+      return ChannelProxy(context, topics)
     }
   }
 }

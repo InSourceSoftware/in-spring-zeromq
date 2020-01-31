@@ -39,7 +39,7 @@ class ZmqTemplateTest {
     val zmqTemplate = ZmqTemplate().apply {
       topic = "ZmqTemplateTest"
       routingKey = "Message"
-      messageConverter = DefaultMessageConverter()
+      messageConverter = VerySimpleMessageConverter()
     }
 
     // Received using default routing key of Message

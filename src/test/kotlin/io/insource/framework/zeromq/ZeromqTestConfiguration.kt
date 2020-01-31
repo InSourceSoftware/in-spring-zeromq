@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration
 @ComponentScan("io.insource.framework")
 class ZeromqTestConfiguration {
   @Bean
-  fun messageConverter(): DefaultMessageConverter {
-    return DefaultMessageConverter()
+  fun messageConverter(): MessageConverter {
+    return VerySimpleMessageConverter()
   }
 }
