@@ -1,8 +1,12 @@
 # Release Notes
 
-## 0.0.1
+## 0.0.3
 
-* Initial release
+* Un-deprecated `ChannelFactory` and changed purpose of the class
+* Refactored `ZmqTemplate` to use `ChannelFactory`
+* Renamed `Channels` to `ChannelProxy` and made public
+* Made `ZmqHandlerInvoker` an `internal` class
+* Improved method signature matching in `ZmqHandlerInvoker`
 
 ## 0.0.2
 
@@ -12,3 +16,7 @@
 * Added `ZmqTemplate` class with basic `send()` operations
 * Deprecated `ChannelFactory` which is superceded by `ZmqTemplate`
 * `Channel` now implements `Closeable`
+
+## 0.0.1
+
+* Initial release
