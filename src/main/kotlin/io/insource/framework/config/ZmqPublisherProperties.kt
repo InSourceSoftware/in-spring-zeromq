@@ -23,5 +23,5 @@ internal class ZmqPublisherProperties {
   /**
    * A list of topics to bind to within this application instance (JVM).
    */
-  var topics = listOf("default")
+  var topics = listOf("events")
 }
