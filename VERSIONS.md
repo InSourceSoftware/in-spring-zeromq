@@ -1,5 +1,13 @@
 # Release Notes
 
+## 0.0.4
+
+* Updated Spring Boot to 2.3.1.RELEASE
+* Added `javax.annotation-api` dependency
+* Fixed import of `assertThat` to use `org.hamcrest.MatcherAssert`
+* Updated Kotlin to 1.3.72
+* Upgraded gradle to 6.4.1
+
 ## 0.0.3
 
 * Un-deprecated `ChannelFactory` and changed purpose of the class

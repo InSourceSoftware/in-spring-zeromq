@@ -2,8 +2,8 @@ package io.insource.framework.zeromq
 
 import io.insource.framework.annotation.ZmqHandler
 import io.insource.framework.annotation.ZmqListener
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.hasItem
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,5 +1,4 @@
 import io.insource.build.Publishing
-import io.insource.build.Versions
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -7,8 +6,8 @@ plugins {
   id("maven")
   id("signing")
   id("maven-publish")
-  id("org.jetbrains.kotlin.jvm") version "1.3.50"
-  id("org.jetbrains.kotlin.plugin.spring") version "1.3.50"
+  id("org.jetbrains.kotlin.jvm") version "1.3.72"
+  id("org.jetbrains.kotlin.plugin.spring") version "1.3.72"
 }
 
 tasks.register<Jar>("sourcesJar") {
@@ -74,14 +73,16 @@ repositories {
 }
 
 dependencies {
-  val springBootVersion = Versions.springBoot
-  val jzmqApiVersion = Versions.jzmqApi
+  val jzmqApiVersion = "0.2.0"
+  val springBootVersion = "2.3.1.RELEASE"
+  val annotationApiVersion = "1.3.2"
 
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.springframework.boot:spring-boot-autoconfigure:$springBootVersion")
   implementation("org.springframework:spring-context:$springBootVersion")
   implementation("org.zeromq:jzmq-api:$jzmqApiVersion")
+  implementation("javax.annotation:javax.annotation-api:$annotationApiVersion")
   compileOnly("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
   testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
 }
