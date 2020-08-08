@@ -39,11 +39,26 @@ internal class TopicListener(
 
   @PostConstruct
   fun start() {
+    /*
+     * Perform the following tasks on startup:
+     * - Find all beans annotated with @ZmqSubscriber
+     * - For each subscriber:
+     *   - Create invoker based on type of message listener
+     *   - For each queue binding:
+     *     - Create a pub/sub socket pair for each unique queue name:
+     *       - Create subscriber socket as a separate inbox
+     *       - Add publisher socket to lookup table by Queue ID
+     *     - Register subscription binding to queue by topic and routing key
+     *   - Create a single reactor thread to process messages for this subscriber
+     * - Bind listener to configured port
+     */
+
+    // Find all beans annotated with @ZmqSubscriber
     val messageListeners = beanFactory.getBeansWithAnnotation(ZmqSubscriber::class).values
     for (messageListener in messageListeners) {
       LOGGER.debug("Found class {} with @{}", messageListener::class.simpleName, ZmqSubscriber::class.simpleName)
 
-      val annotation = getAnnotationByType(messageListener::class, ZmqSubscriber::class)
+      // Create invoker based on type of message listener
       val messageListenerInvoker = if (messageListener is MessageListener) {
         MessageListenerInvoker(messageListener)
       } else {
@@ -51,8 +66,11 @@ internal class TopicListener(
       }
       val messageListenerInvokerId = messageListenerInvoker.hashCode()
 
+      // Create single reactor thread to process messages for this subscriber
       val reactorBuilder = context.buildReactor()
+      val annotation = getAnnotationByType(messageListener::class, ZmqSubscriber::class)
       for (queueBinding in annotation.values) {
+        // Use @QueueBinding info to create local subscriptions
         val topic = queueBinding.topic
         val routingKey = queueBinding.key
         val queue = queueBinding.queue
@@ -76,12 +94,15 @@ internal class TopicListener(
         } += queueId
       }
 
+      // Add one reactor per subscriber
       reactors += reactorBuilder.build()
     }
 
+    // Look up port to bind to for this VM
     val port = zmqSubscriberProperties.port
     LOGGER.debug("Registering listener {} on port {}", TopicListener::class.simpleName, port)
 
+    // Bind listener to configured port and start reactors
     reactors += context.listenOn(port, MessageListenerInvoker(Agent()))
     reactors.forEach(Reactor::start)
   }
@@ -108,6 +129,7 @@ internal class TopicListener(
         return
       }
 
+      // Process topic info
       val topic = frame.string         // Topic name
       val routingKey = frame.string    // Routing key
       LOGGER.debug("Received message for topic {} with routing-key {}", topic, routingKey)
@@ -118,9 +140,12 @@ internal class TopicListener(
         return
       }
 
+      // Deliver message to each registered subscriber
       for (queue in subscriptions) {
+        val socket = queues[queue] ?: throw IllegalStateException("Unable to find socket for topic $topic with routing-key $routingKey on queue  $queue")
+
         LOGGER.trace("Resolved subscription for topic {} with routing-key {} - Delivering to queue {}", topic, routingKey, queue)
-        queues[queue]!!.send(message)
+        socket.send(message)
       }
     }
   }
