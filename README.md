@@ -11,48 +11,15 @@ Maven:
 <dependency>
   <groupId>io.insource</groupId>
   <artifactId>in-spring-zeromq</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
 </dependency> 
 ```
-
-Note: The dependency is currently hosted on GitHub Packages. Add the following to your `~/.m2/settings.xml`:
-
-```xml
-<distributionManagement>
-   <repository>
-     <id>github</id>
-     <name>GitHub InSourceSoftware Apache Maven Packages</name>
-     <url>https://maven.pkg.github.com/InSourceSoftware/in-spring-zeromq</url>
-   </repository>
-</distributionManagement>
-```
-
-See [the docs](https://docs.github.com/en/free-pro-team@latest/packages/guides/configuring-apache-maven-for-use-with-github-packages) for more information on configuring Maven for use with GitHub Packages.
 
 Gradle:
 
 ```kotlin
-implementation("io.insource:in-spring-zeromq:0.0.2")
+implementation("io.insource:in-spring-zeromq:0.0.4")
 ```
-
-Note: The dependency is currently hosted on GitHub Packages. Add the following to your gradle build:
-
-```groovy
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/InSourceSoftware/in-spring-zeromq")
-            credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-            }
-        }
-    }
-}
-```
-
-See [the docs](https://docs.github.com/en/free-pro-team@latest/packages/guides/configuring-gradle-for-use-with-github-packages) for more information on configuring Maven for use with GitHub Packages.
 
 ### Publisher
 

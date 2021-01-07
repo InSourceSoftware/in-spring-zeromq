@@ -2,6 +2,8 @@
 
 ## 0.0.4
 
+* Added gradle-wrapper.properties
+* Added publication for Sonatype staging repository
 * Updated Spring Boot to 2.3.1.RELEASE
 * Added `javax.annotation-api` dependency
 * Fixed import of `assertThat` to use `org.hamcrest.MatcherAssert`
@@ -10,6 +12,7 @@
 
 ## 0.0.3
 
+* Changed default topic name to `events`
 * Un-deprecated `ChannelFactory` and changed purpose of the class
 * Refactored `ZmqTemplate` to use `ChannelFactory`
 * Renamed `Channels` to `ChannelProxy` and made public
