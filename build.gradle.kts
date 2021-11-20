@@ -6,8 +6,8 @@ plugins {
   id("maven")
   id("signing")
   id("maven-publish")
-  id("org.jetbrains.kotlin.jvm") version "1.3.72"
-  id("org.jetbrains.kotlin.plugin.spring") version "1.3.72"
+  id("org.jetbrains.kotlin.jvm") version "1.6.0"
+  id("org.jetbrains.kotlin.plugin.spring") version "1.6.0"
 }
 
 tasks.register<Jar>("sourcesJar") {
