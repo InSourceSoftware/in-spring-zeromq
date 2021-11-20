@@ -94,7 +94,7 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.springframework.boot:spring-boot-autoconfigure:$springBootVersion")
-  implementation("org.springframework:spring-context:$springBootVersion")
+  implementation("org.springframework:spring-context")
   implementation("javax.annotation:javax.annotation-api:$annotationApiVersion")
   compileOnly("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
   testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
@@ -105,4 +105,8 @@ tasks.withType<KotlinCompile> {
     freeCompilerArgs = listOf("-Xjsr305=strict")
     jvmTarget = "11"
   }
+}
+
+tasks.withType<Test> {
+  useJUnitPlatform()
 }
