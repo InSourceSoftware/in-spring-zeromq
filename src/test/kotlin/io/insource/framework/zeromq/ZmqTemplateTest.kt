@@ -6,14 +6,14 @@ import io.insource.framework.annotation.ZmqSubscriber
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.hasItem
 import org.hamcrest.Matchers.hasSize
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.util.concurrent.CountDownLatch
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [ZeromqTestConfiguration::class])
 class ZmqTemplateTest {
   @ZmqSubscriber(
@@ -28,7 +28,7 @@ class ZmqTemplateTest {
     }
   }
 
-  @Before
+  @BeforeEach
   fun setUp() {
     // Allow a little time for PUB and SUB to connect to each other
     Thread.sleep(50)

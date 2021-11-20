@@ -4,17 +4,17 @@ import io.insource.framework.annotation.ZmqHandler
 import io.insource.framework.annotation.ZmqListener
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.hasItem
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.zeromq.Sockets
 import org.zeromq.api.Message
 import org.zeromq.api.SocketType
 import java.util.concurrent.CountDownLatch
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [ZeromqTestConfiguration::class])
 class SocketListenerTest {
   @ZmqListener(52346)
@@ -26,7 +26,7 @@ class SocketListenerTest {
     }
   }
 
-  @Before
+  @BeforeEach
   fun setUp() {
   }
 
