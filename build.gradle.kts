@@ -88,16 +88,17 @@ repositories {
 dependencies {
   val jzmqApiVersion = "0.2.0"
   val springBootVersion = "2.6.0"
-  val annotationApiVersion = "1.3.2"
+
+  implementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
 
   api("org.zeromq:jzmq-api:$jzmqApiVersion")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-  implementation("org.springframework.boot:spring-boot-autoconfigure:$springBootVersion")
+  implementation("org.springframework.boot:spring-boot-autoconfigure")
   implementation("org.springframework:spring-context")
-  implementation("javax.annotation:javax.annotation-api:$annotationApiVersion")
-  compileOnly("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
-  testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+  implementation("javax.annotation:javax.annotation-api")
+  compileOnly("org.springframework.boot:spring-boot-configuration-processor")
+  testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile> {
