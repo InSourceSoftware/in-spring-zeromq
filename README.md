@@ -11,14 +11,14 @@ Maven:
 <dependency>
   <groupId>io.insource</groupId>
   <artifactId>in-spring-zeromq</artifactId>
-  <version>0.0.4</version>
+  <version>0.1.0</version>
 </dependency> 
 ```
 
 Gradle:
 
 ```kotlin
-implementation("io.insource:in-spring-zeromq:0.0.4")
+implementation("io.insource:in-spring-zeromq:0.1.0")
 ```
 
 ### Publisher
