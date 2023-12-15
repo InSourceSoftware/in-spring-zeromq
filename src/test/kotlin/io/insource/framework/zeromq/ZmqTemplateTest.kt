@@ -8,12 +8,9 @@ import org.hamcrest.Matchers.hasItem
 import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.util.concurrent.CountDownLatch
 
-@ExtendWith(SpringExtension::class)
 @SpringBootTest(classes = [ZeromqTestConfiguration::class])
 class ZmqTemplateTest {
   @ZmqSubscriber(

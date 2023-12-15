@@ -4,6 +4,8 @@ import io.insource.framework.annotation.ConditionalOnEnableZmqSubscriber
 import io.insource.framework.annotation.ZmqSubscriber
 import io.insource.framework.config.ZmqSubscriberProperties
 import io.insource.framework.util.AnnotationUtils.getAnnotationByType
+import jakarta.annotation.PostConstruct
+import jakarta.annotation.PreDestroy
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.ListableBeanFactory
@@ -15,8 +17,6 @@ import org.zeromq.api.Message
 import org.zeromq.api.Reactor
 import org.zeromq.api.Socket
 import org.zeromq.api.SocketType
-import javax.annotation.PostConstruct
-import javax.annotation.PreDestroy
 import kotlin.reflect.KClass
 
 /**

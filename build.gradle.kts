@@ -3,11 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   id("java")
-  id("maven")
   id("signing")
   id("maven-publish")
-  id("org.jetbrains.kotlin.jvm") version "1.6.0"
-  id("org.jetbrains.kotlin.plugin.spring") version "1.6.0"
+  id("org.jetbrains.kotlin.jvm") version "1.9.20"
+  id("org.jetbrains.kotlin.plugin.spring") version "1.9.20"
 }
 
 tasks.register<Jar>("sourcesJar") {
@@ -87,7 +86,7 @@ repositories {
 
 dependencies {
   val jzmqApiVersion = "0.2.0"
-  val springBootVersion = "2.6.0"
+  val springBootVersion = "3.2.0"
 
   implementation(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))
 
@@ -96,7 +95,7 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.springframework.boot:spring-boot-autoconfigure")
   implementation("org.springframework:spring-context")
-  implementation("javax.annotation:javax.annotation-api")
+  implementation("jakarta.annotation:jakarta.annotation-api")
   compileOnly("org.springframework.boot:spring-boot-configuration-processor")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
@@ -104,7 +103,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
   kotlinOptions {
     freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "11"
+    jvmTarget = "17"
   }
 }
 
