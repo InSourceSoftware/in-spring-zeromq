@@ -3,6 +3,8 @@ package io.insource.framework.zeromq
 import io.insource.framework.annotation.ConditionalOnEnableZmqListener
 import io.insource.framework.annotation.ZmqListener
 import io.insource.framework.util.AnnotationUtils.getAnnotationByType
+import jakarta.annotation.PostConstruct
+import jakarta.annotation.PreDestroy
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.ListableBeanFactory
@@ -10,8 +12,6 @@ import org.springframework.stereotype.Component
 import org.zeromq.ContextFactory
 import org.zeromq.api.Reactor
 import org.zeromq.api.SocketType
-import javax.annotation.PostConstruct
-import javax.annotation.PreDestroy
 
 /**
  * SocketListener class that runs in a separate thread as an event-driven reactor

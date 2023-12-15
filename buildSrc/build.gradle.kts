@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("org.jetbrains.kotlin.jvm") version "1.3.72"
-  id("org.jetbrains.kotlin.plugin.spring") version "1.3.72"
+  id("org.jetbrains.kotlin.jvm") version "1.9.20"
+  id("org.jetbrains.kotlin.plugin.spring") version "1.9.20"
 }
 
 repositories {
@@ -18,6 +18,6 @@ dependencies {
 tasks.withType<KotlinCompile> {
   kotlinOptions {
     freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "1.8"
+    jvmTarget = "17"
   }
 }
